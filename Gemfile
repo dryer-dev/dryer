@@ -73,3 +73,9 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+# Passenger web server and application server for Ruby,
+gem 'passenger', '~> 6.0', '>= 6.0.17'
+
+
+
