@@ -51,11 +51,11 @@ test:
 staging:
   <<: *default
   database: dryer_staging
-  username: dryer
-  password: <%= Rails.application.credentials.dig(:database, :staging_password) %>
+  username: <%= Rails.application.credentials.dig(:database, :server_username) %>
+  password: <%= Rails.application.credentials.dig(:database, :server_password) %>
 
 production:
   <<: *default
   database: dryer_production
-  username: dryer
-  password: <%= Rails.application.credentials.dig(:database, :production_password) %>
+  username: <%= Rails.application.credentials.dig(:database, :server_username) %>
+  password: <%= Rails.application.credentials.dig(:database, :server_password) %>
