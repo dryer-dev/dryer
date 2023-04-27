@@ -45,6 +45,12 @@ gem 'devise', '~> 4.9', '>= 4.9.2'
 # An elegant, structured (X)HTML/XML templating engine.
 gem 'haml', '~> 6.1', '>= 6.1.1'
 
+# Encapsulate the common pattern of asynchronously executing longer tasks in the background.
+gem 'delayed_job', '~> 4.1', '>= 4.1.11'
+
+# ActiveRecord backend for Delayed::Job
+gem 'delayed_job_active_record', '~> 4.1', '>= 4.1.7'
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
