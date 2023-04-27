@@ -51,6 +51,9 @@ gem 'delayed_job', '~> 4.1', '>= 4.1.11'
 # ActiveRecord backend for Delayed::Job
 gem 'delayed_job_active_record', '~> 4.1', '>= 4.1.7'
 
+# Integrates multi-tenancy into a Rails application in a convenient and out-of-your way manner
+gem 'acts_as_tenant', '~> 0.6.1'
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
