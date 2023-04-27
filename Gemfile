@@ -42,6 +42,9 @@ gem 'image_processing', '~> 1.12', '>= 1.12.2'
 # Flexible authentication solution for Rails with Warden
 gem 'devise', '~> 4.9', '>= 4.9.2'
 
+# An elegant, structured (X)HTML/XML templating engine.
+gem 'haml', '~> 6.1', '>= 6.1.1'
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 

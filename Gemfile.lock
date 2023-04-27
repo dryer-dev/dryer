@@ -100,6 +100,10 @@ GEM
     ffi (1.15.5)
     globalid (1.1.0)
       activesupport (>= 5.0)
+    haml (6.1.1)
+      temple (>= 0.8.2)
+      thor
+      tilt
     i18n (1.13.0)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.2)
@@ -203,7 +207,9 @@ GEM
       sprockets (>= 3.0.0)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
+    temple (0.10.0)
     thor (1.2.1)
+    tilt (2.1.0)
     timeout (0.3.2)
     turbo-rails (1.4.0)
       actionpack (>= 6.0.0)
@@ -239,6 +245,7 @@ DEPENDENCIES
   cssbundling-rails
   debug
   devise (~> 4.9, >= 4.9.2)
+  haml (~> 6.1, >= 6.1.1)
   image_processing (~> 1.12, >= 1.12.2)
   jbuilder
   jsbundling-rails
