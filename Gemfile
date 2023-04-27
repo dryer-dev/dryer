@@ -39,6 +39,9 @@ gem 'mini_magick', '~> 4.12'
 # High-level wrapper for processing images for the web with ImageMagick or libvips.
 gem 'image_processing', '~> 1.12', '>= 1.12.2'
 
+# Flexible authentication solution for Rails with Warden
+gem 'devise', '~> 4.9', '>= 4.9.2'
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
