@@ -33,6 +33,12 @@ gem "jbuilder"
 # Use Redis adapter to run Action Cable in production
 gem "redis", "~> 4.0"
 
+# Manipulate images with minimal use of memory via ImageMagick / GraphicsMagick
+gem 'mini_magick', '~> 4.12'
+
+# High-level wrapper for processing images for the web with ImageMagick or libvips.
+gem 'image_processing', '~> 1.12', '>= 1.12.2'
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
