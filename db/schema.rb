@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_27_173521) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_28_085254) do
+  create_table "accounts", charset: "utf8mb4", force: :cascade do |t|
+    t.string "domain"
+    t.string "name"
+    t.string "subdomain"
+  end
+
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
