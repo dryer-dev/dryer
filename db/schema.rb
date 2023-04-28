@@ -10,11 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_28_100527) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_28_102401) do
   create_table "accounts", charset: "utf8mb4", force: :cascade do |t|
     t.string "domain"
     t.string "name"
     t.string "subdomain"
+  end
+
+  create_table "pages", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_pages_on_account_id"
   end
 
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
@@ -30,4 +38,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_28_100527) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "pages", "accounts"
 end
