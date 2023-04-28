@@ -80,6 +80,10 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  # Haml generators for Rails 5, 6, and 7.
+  gem 'haml-rails', '~> 2.1'
+  # Converts HTML into Haml
+  gem 'html2haml', '~> 2.3'
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
