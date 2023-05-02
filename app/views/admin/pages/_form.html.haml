@@ -6,6 +6,9 @@
         - @admin_page.errors.full_messages.each do |message|
           %li= message
   .field
+    = site_sections
+
+  .field
     = f.label :title
     = f.text_field :title
   .actions
