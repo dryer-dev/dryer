@@ -5,7 +5,7 @@ class PagesController < ApplicationController
 
   def index
     @pages = Page.all
-    render "#{current_tenant.subdomain}/index" if current_tenant
+    render "subdomains/#{current_tenant.subdomain}/index" if current_tenant
   end
 
   # GET /pages/1 or /pages/1.json
