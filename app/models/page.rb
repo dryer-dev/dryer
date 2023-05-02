@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Page < ApplicationRecord
-  acts_as_tenant :account
+  acts_as_tenant :site
 
 
   def downcase_fields
