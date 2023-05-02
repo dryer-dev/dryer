@@ -10,4 +10,6 @@
       = stylesheet_link_tag "#{current_tenant&.subdomain}", "data-turbo-track": "reload"
       = javascript_include_tag "#{current_tenant&.subdomain}", "data-turbo-track": "reload", defer: true
   %body
+    = render "#{current_tenant&.subdomain}/header"
     = yield
+    = render "#{current_tenant&.subdomain}/footer"
