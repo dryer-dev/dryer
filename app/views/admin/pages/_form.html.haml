@@ -1,4 +1,4 @@
-= form_for @admin_page do |f|
+= form_for [:admin, @admin_page] do |f|
   - if @admin_page.errors.any?
     #error_explanation
       %h2= "#{pluralize(@admin_page.errors.count, "error")} prohibited this admin_page from being saved:"

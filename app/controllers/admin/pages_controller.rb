@@ -25,7 +25,7 @@ class Admin::PagesController < AdminController
 
     respond_to do |format|
       if @admin_page.save
-        format.html { redirect_to admin_page_url(@admin_page), notice: "Page was successfully created." }
+        format.html { redirect_to admin_pages_url, notice: "Page was successfully created." }
         format.json { render :show, status: :created, location: @admin_page }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class Admin::PagesController < AdminController
   def update
     respond_to do |format|
       if @admin_page.update(admin_page_params)
-        format.html { redirect_to admin_page_url(@admin_page), notice: "Page was successfully updated." }
+        format.html { redirect_to admin_pages_url, notice: "Page was successfully updated." }
         format.json { render :show, status: :ok, location: @admin_page }
       else
         format.html { render :edit, status: :unprocessable_entity }
