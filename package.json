@@ -1,15 +1,17 @@
 {
-  "name": "app",
   "private": "true",
+  "workspaces": [
+    "packages/*"
+  ],
   "dependencies": {
-    "@hotwired/stimulus": "^3.2.1",
-    "@hotwired/turbo-rails": "^7.3.0",
-    "sass": "^1.62.1",
-    "webpack": "^5.80.0",
-    "webpack-cli": "^5.0.2"
+    "concurrently": "^8.0.1"
   },
   "scripts": {
-    "build": "webpack --config webpack.config.js",
-    "build:css": "sass ./app/assets/stylesheets/application.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules"
+    "dryer": "yarn workspace dryer run build --watch",
+    "dryer:css": "yarn workspace dryer run build:css --watch",
+    "winstonferguson": "yarn workspace winstonferguson run build --watch",
+    "winstonferguson:css": "yarn workspace winstonferguson run build:css --watch",
+    "build": "concurrently --kill-others-on-fail \"yarn dryer\"  \"yarn winstonferguson\"",
+    "build:css": "concurrently --kill-others-on-fail \"yarn dryer:css\"  \"yarn winstonferguson:css\""
   }
 }

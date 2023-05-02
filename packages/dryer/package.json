@@ -1,0 +1,16 @@
+{
+  "name": "dryer",
+  "private": "true",
+  "version": "0.1.0",
+  "dependencies": {
+    "@hotwired/stimulus": "^3.2.1",
+    "@hotwired/turbo-rails": "^7.3.0",
+    "sass": "^1.62.1",
+    "webpack": "^5.80.0",
+    "webpack-cli": "^5.0.2"
+  },
+  "scripts": {
+    "build": "webpack --config webpack.config.js",
+    "build:css": "sass ../../app/assets/stylesheets/dryer/application.scss:../../app/assets/builds/dryer.css --no-source-map --load-path=node_modules"
+  }
+}
