@@ -1,0 +1,12 @@
+= form_for @admin_page do |f|
+  - if @admin_page.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@admin_page.errors.count, "error")} prohibited this admin_page from being saved:"
+      %ul
+        - @admin_page.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = f.label :title
+    = f.text_field :title
+  .actions
+    = f.submit 'Save'
