@@ -1,0 +1,24 @@
+{
+  "name": "admin",
+  "private": "true",
+  "version": "0.1.0",
+  "dependencies": {
+    "@editorjs/code": "^2.8.0",
+    "@editorjs/editorjs": "^2.26.5",
+    "@editorjs/header": "^2.7.0",
+    "@editorjs/image": "^2.8.1",
+    "@editorjs/link": "^2.5.0",
+    "@editorjs/list": "^1.8.0",
+    "@editorjs/paragraph": "^2.9.0",
+    "@hotwired/stimulus": "^3.2.1",
+    "@hotwired/stimulus-webpack-helpers": "^1.0.1",
+    "@hotwired/turbo-rails": "^7.3.0",
+    "sass": "^1.62.1",
+    "webpack": "^5.80.0",
+    "webpack-cli": "^5.0.2"
+  },
+  "scripts": {
+    "build": "webpack --config webpack.config.js",
+    "build:css": "sass ../../app/assets/stylesheets/admin.scss:../../app/assets/builds/admin.css --no-source-map --load-path=node_modules"
+  }
+}

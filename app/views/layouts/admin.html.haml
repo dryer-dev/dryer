@@ -1,0 +1,15 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Dryer
+    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+    = csrf_meta_tags
+    = csp_meta_tag
+    - if current_tenant
+      = stylesheet_link_tag "admin", "data-turbo-track": "reload"
+      = javascript_include_tag "admin", "data-turbo-track": "reload", defer: true
+  %body
+    = render "subdomains/#{current_tenant.subdomain}/header" if current_tenant
+    = yield
+    = render "subdomains/#{current_tenant.subdomain}/footer" if current_tenant

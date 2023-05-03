@@ -7,11 +7,13 @@
     "concurrently": "^8.0.1"
   },
   "scripts": {
+    "admin": "yarn workspace admin run build --watch",
+    "admin:css": "yarn workspace admin run build:css --watch",
     "dryer": "yarn workspace dryer run build --watch",
     "dryer:css": "yarn workspace dryer run build:css --watch",
     "winstonferguson": "yarn workspace winstonferguson run build --watch",
     "winstonferguson:css": "yarn workspace winstonferguson run build:css --watch",
-    "build": "concurrently --kill-others-on-fail \"yarn dryer\"  \"yarn winstonferguson\"",
-    "build:css": "concurrently --kill-others-on-fail \"yarn dryer:css\"  \"yarn winstonferguson:css\""
+    "build": "concurrently --kill-others-on-fail \"yarn admin\" \"yarn dryer\"  \"yarn winstonferguson\"",
+    "build:css": "concurrently --kill-others-on-fail \"yarn admin:css\" \"yarn dryer:css\"  \"yarn winstonferguson:css\""
   }
 }
