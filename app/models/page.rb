@@ -5,7 +5,7 @@
 class Page < ApplicationRecord
   # Store all strings in lowercase without trailing whitespace
   include StringCleaner
-  string_cleanables only: %i[title]
+  # string_cleanables except: %i[title]
   # Pages are scoped to sites
   acts_as_tenant :site
   # They have many sections

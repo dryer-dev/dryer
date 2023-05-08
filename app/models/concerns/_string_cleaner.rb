@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-# include this concern in your model to strip and downcase string attributes before validation
+# clean a string before validation
+# you can specify which attributes to clean by passing a hash to the string_cleanables method
 module StringCleaner
   extend ActiveSupport::Concern
 
@@ -13,31 +14,41 @@ module StringCleaner
 
     private
 
+    # specify which attributes to clean
+    # using a hash with :only or :except keys
+    # this is optional
     def string_cleanables(opts = {})
       @stringclean_opts = opts
     end
   end
 
-  def clean_string(string)
+  def cleaner(string)
+    # what we, currently, consider cleaning
+    # strip and downcase string
     string.strip! || string
     string.downcase! || string
   end
 
   def clean_strings
-    string_cleanables.each { |attr| clean_string(send(attr)) }
+    # loop through string attributes and clean them
+    string_cleanables.each { |attr| cleaner(send(attr)) }
   end
 
   def string_attributes
+    # get model's string attributes via type_for_attribute
+    # and return them as an array of symbols
     attribute_names.select { |attr| type_for_attribute(attr).type == :string }
+                   .map(&:to_sym)
   end
 
   def string_cleanables
+    # get all string attributes for cleaning
     cleanables = string_attributes
-
-    if self.class.stringclean_opts.present?
-      stringclean_opts = self.class.stringclean_opts
-      cleanables.select { |attr| stringclean_opts[:only].include?(attr) } if stringclean_opts[:only]
-      cleanables.reject { |attr| stringclean_opts[:except].include?(attr) } if stringclean_opts[:except]
+    stringclean_opts = self.class.stringclean_opts
+    # if stringclean_opts are present, filter cleanables
+    if stringclean_opts.present?
+      cleanables.select! { |attr| stringclean_opts[:only].include?(attr) } if stringclean_opts[:only]
+      cleanables.reject! { |attr| stringclean_opts[:except].include?(attr) } if stringclean_opts[:except]
     end
     cleanables
   end
