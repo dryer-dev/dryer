@@ -11,6 +11,6 @@
   },
   "scripts": {
     "build": "webpack --config webpack.config.js",
-    "build:css": "sass ../../app/assets/stylesheets/dryer/application.scss:../../app/assets/builds/dryer.css --no-source-map --load-path=node_modules"
+    "build:css": "sass ../../app/assets/stylesheets/dryer/app.scss:../../app/assets/builds/dryer/app.css --no-source-map --load-path=node_modules"
   }
 }

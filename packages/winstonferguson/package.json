@@ -11,6 +11,6 @@
   },
   "scripts": {
     "build": "webpack --config webpack.config.js",
-    "build:css": "sass ../../app/assets/stylesheets/winstonferguson/application.scss:../../app/assets/builds/winstonferguson.css --no-source-map --load-path=node_modules"
+    "build:css": "sass ../../app/assets/stylesheets/winstonferguson/app.scss:../../app/assets/builds/winstonferguson/app.css --no-source-map --load-path=node_modules"
   }
 }

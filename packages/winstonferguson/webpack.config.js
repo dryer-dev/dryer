@@ -1,5 +1,5 @@
-const path    = require("path")
-const webpack = require("webpack")
+const path      = require("path")
+const webpack   = require("webpack")
 const workspace = "winstonferguson"
 
 module.exports = {
@@ -9,9 +9,9 @@ module.exports = {
     application: `../../app/javascript/${workspace}/application.js`
   },
   output: {
-    filename: `${workspace}.js`,
-    sourceMapFilename: `${workspace}.map`,
-    path: path.resolve(__dirname, "../../app/assets/builds"),
+    filename: `app.js`,
+    sourceMapFilename: `app.map`,
+    path: path.resolve(__dirname, `../../app/assets/builds/${workspace}`),
   },
   plugins: [
     new webpack.optimize.LimitChunkCountPlugin({

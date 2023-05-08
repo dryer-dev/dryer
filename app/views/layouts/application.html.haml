@@ -7,8 +7,8 @@
     = csrf_meta_tags
     = csp_meta_tag
     - if current_tenant
-      = stylesheet_link_tag "#{current_tenant&.subdomain}", "data-turbo-track": "reload"
-      = javascript_include_tag "#{current_tenant&.subdomain}", "data-turbo-track": "reload", defer: true
+      = stylesheet_link_tag "#{current_tenant&.subdomain}/app", "data-turbo-track": "reload"
+      = javascript_include_tag "#{current_tenant&.subdomain}/app", "data-turbo-track": "reload", defer: true
   %body
     = render "subdomains/#{current_tenant.subdomain}/header" if current_tenant
     = yield
