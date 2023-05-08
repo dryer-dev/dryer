@@ -11,5 +11,8 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :pages, except: [:show]
     resources :sites, except: [:show]
+    resources :sections
+
+    post "/nested_fields/:model(/:id)/build/:association(/:partial)", to: "nested_fields#build", as: :build_fields
   end
 end

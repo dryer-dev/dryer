@@ -20,9 +20,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_160821) do
   end
 
   create_table "sections", charset: "utf8mb4", force: :cascade do |t|
-    t.string "name"
+    t.bigint "page_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["page_id"], name: "index_sections_on_page_id"
   end
 
   create_table "sites", charset: "utf8mb4", force: :cascade do |t|
@@ -46,4 +47,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_160821) do
   end
 
   add_foreign_key "pages", "sites"
+  add_foreign_key "sections", "pages"
 end
