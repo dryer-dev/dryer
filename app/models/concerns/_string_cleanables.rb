@@ -2,7 +2,7 @@
 
 # clean a string before validation
 # you can specify which attributes to clean by passing a hash to the string_cleanables method
-module StringCleaner
+module StringCleanables
   extend ActiveSupport::Concern
 
   included do

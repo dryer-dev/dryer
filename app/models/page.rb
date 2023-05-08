@@ -4,8 +4,7 @@
 # They have a title, a slug, SEO meta information, and related sections
 class Page < ApplicationRecord
   # Store all strings in lowercase without trailing whitespace
-  include StringCleaner
-  # string_cleanables except: %i[title]
+  include StringCleanables
   # Pages are scoped to sites
   acts_as_tenant :site
   # They have many sections
