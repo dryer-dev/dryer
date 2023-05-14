@@ -11,10 +11,13 @@
     - @admin_pages.each do |admin_page|
       %tr
         %td= admin_page.title
+        %td= admin_page.parent.title if admin_page.nesting.present?
+        %td= admin_page.children.first.title if admin_page.children.present?
         %td= link_to 'Show', admin_page
         %td= link_to 'Edit', edit_admin_page_path(admin_page)
         %td= button_to 'Destroy', admin_page_path(admin_page), method: :delete, form: { data: { turbo_confirm: "Are you sure?" } }
 
 %br
+= puts Nesting.all.inspect
 
 = link_to 'New Page', new_admin_page_path

@@ -10,8 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_02_160821) do
-  create_table "pages", charset: "utf8mb4", force: :cascade do |t|
+ActiveRecord::Schema[7.0].define(version: 2023_05_14_100453) do
+  create_table "nestings", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "parentable_type"
+    t.bigint "parentable_id"
+    t.string "childable_type"
+    t.bigint "childable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["childable_type", "childable_id"], name: "index_nestings_on_childable"
+    t.index ["parentable_type", "parentable_id"], name: "index_nestings_on_parentable"
+  end
+
+  create_table "pages", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "site_id", null: false
     t.string "title"
     t.datetime "created_at", null: false
@@ -19,21 +30,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_160821) do
     t.index ["site_id"], name: "index_pages_on_site_id"
   end
 
-  create_table "sections", charset: "utf8mb4", force: :cascade do |t|
+  create_table "sections", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "page_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["page_id"], name: "index_sections_on_page_id"
   end
 
-  create_table "sites", charset: "utf8mb4", force: :cascade do |t|
+  create_table "sites", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "domain"
     t.string "subdomain"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", charset: "utf8mb4", force: :cascade do |t|
+  create_table "users", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

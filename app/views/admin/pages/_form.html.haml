@@ -9,6 +9,10 @@
     = f.label :title
     = f.text_field :title
   .field
+    = f.fields_for :nesting_attributes do |n|
+      = n.hidden_field :parentable_type, value: f.object.class.name
+      = n.collection_select :parentable_id, f.object.class.all, :id, :title, include_blank: true, selected: @admin_page.nesting.parentable_id
+  .field
     = f.fields_for :sections do |s|
       = render "admin/sections/nested_fields", f: s 
     = link_to_add_fields "Add section", f, :sections
