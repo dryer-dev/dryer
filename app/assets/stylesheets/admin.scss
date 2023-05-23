@@ -19,3 +19,28 @@ input {
 h1 {
   font-weight: 900;
 }
+
+.add_fields {
+  display: block;
+}
+
+.remove_fields {
+  color: red;
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 1;
+
+  position: absolute;
+  top: 0;
+  right: - 1.5rem;
+  z-index: 999;
+}
+
+nested-fields {
+  border: 1px solid #ccc;
+  display: block;
+  padding: 1rem;
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}

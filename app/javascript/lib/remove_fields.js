@@ -7,7 +7,8 @@ function removeNestedFields(e) {
   // Get element
   let element = e.target;
   // Find the parent wrapper for the set of nested fields.
-  let fieldParent = element.closest('.nested-field')
+  let fieldParent = element.closest('nested-field')
+  console.log(element);
   // If there is a parent wrapper, find the hidden delete field.
   let deleteField = fieldParent
     ? fieldParent.querySelector('input[type="hidden"]')
