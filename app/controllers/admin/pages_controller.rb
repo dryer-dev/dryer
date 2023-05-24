@@ -17,13 +17,10 @@ module Admin
     # GET /admin/pages/new
     def new
       @admin_page = Page.new
-      @admin_page.build_nesting if @admin_page.respond_to? :build_nesting
     end
 
     # GET /admin/pages/1/edit
-    def edit
-      @admin_page.build_nesting if (@admin_page.respond_to? :build_nesting) && @admin_page.nesting.nil?
-    end
+    def edit; end
 
     # POST /admin/pages or /admin/pages.json
     def create
@@ -75,7 +72,8 @@ module Admin
       params.require(:page)
             .permit(
               :title,
-              nesting_attributes: %i[id _destroy parentable_id parentable_type]
+              :parentable_id
+              
             )
     end
   end

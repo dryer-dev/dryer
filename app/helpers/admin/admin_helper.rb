@@ -20,7 +20,11 @@ module Admin::AdminHelper
     # `association.to_s.singularize + "_fields"` ends up evaluating to `address_fields`
     # The render function will then look for `views/people/_address_fields.html.erb`
     # The render function also needs to be passed the value of 'builder', because `views/people/_address_fields.html.erb` needs this to render the form tags.
-      render("admin/" + association.to_s + "/nested_fields", f: builder)
+      if options[:class_name]
+        render("admin/" + options[:class_name].pluralize + "/fields", f: builder)
+      else
+        render("admin/" + association.to_s + "/fields", f: builder)
+      end
     end
     # This renders a simple link, but passes information into `data` attributes.
     # This info can be named anything we want, but in this case we chose `data-id:` and `data-fields:`.

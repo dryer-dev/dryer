@@ -14,18 +14,25 @@ module Admin::FormHelper
     ## @options - options passed to the FormBuilder when its created by the form_for call
 
     def nesting_parent_select
-
+      # find the first string attribute
+      # to use as the display value
       string_attr = @object.attribute_names.find { |attr| object.type_for_attribute(attr).type == :string }
-
-      fields_for :nesting_attributes do |n|
-        n.hidden_field :parentable_type, value: @object_name
-        n.collection_select :parentable_id,
-                            @object.class.all,
-                            :id,
-                            string_attr.to_sym,
-                            prompt: 'Select a parent',
-                            selected: @object.nesting.parentable_id
-      end
+      # find the parentable_id if it exists
+      parentable_id = @object&.nesting&.parentable_id
+      # include a blank option if there is a parentable_id
+      # to allow for un-nesting
+      blank = parentable_id.present?
+      # find all the options for the select
+      # excluding the current object
+      options = @object.class.where.not(id: @object.id)
+      # create the select using `collection_select`
+      collection_select :parentable_id,
+                        options,
+                        :id,
+                        string_attr.to_sym,
+                        include_blank: blank,
+                        prompt: 'Select a parent',
+                        selected: parentable_id
     end
   end
 end
