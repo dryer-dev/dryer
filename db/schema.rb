@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_14_100453) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_24_103521) do
   create_table "nestings", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "parentable_type"
     t.bigint "parentable_id"
@@ -31,9 +31,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_14_100453) do
   end
 
   create_table "sections", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.bigint "page_id", null: false
+    t.bigint "page_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "data", size: :long, default: "{}", collation: "utf8mb4_bin"
     t.index ["page_id"], name: "index_sections_on_page_id"
   end
 
