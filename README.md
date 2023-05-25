@@ -2,9 +2,14 @@
 
 I wanted a modern, lightweight, and flexible Rails CMS that was multidomain compatible and developer friendly. 
 
-The use case being an individual or organization building client sites that need flexibility and a backend for updating content. Clients could include small to medium sized enterprises that don't operate in the tech sector (the kind of organization that might consider Shopify Plus or other 4 figure annually SAAS products).
+I built one as the other open source Rails CMS' were already far along a path (that started a long time ago - things have changed) or developing into a paid product. The most suitable one for me, Comfortable Mexican Sofa, hasn't been updated in years.
 
-The benefit of this over an existing CMS:
+
+## Use case 
+
+An individual or organization building client sites that need flexibility and a backend for updating content. Clients could include small to medium sized enterprises that don't operate in the tech sector (the kind of organization that might consider Shopify Plus or other 4 figure annually SAAS products).
+
+The benefit of this over an existing CMS (non Rails):
 
 * Develop or add features specific to a client or cluster of client's needs. *i.e. a booking system for a cluster of small hotel websites*
 * Start with a blank slate for each site's front end - no bloated libraries or overriding inherited styles/scripts. *But, the ability to easily add librabries to any sites if needed.*
@@ -27,6 +32,12 @@ In addtion to the gems bundled with Rails 7, its dependencies include:
 Yarn dependencies:
 * concurrently
 
+## Database
+
+The app relies on the following architecture:
+
+![alt text](https://github.com/[dryer]/[dryer]/dryer-db-schematic.png?raw=true)
+
 
 ## Configuration
 
@@ -48,19 +59,24 @@ For example, package.json might look like:
 "scripts": {
     "admin": "yarn workspace admin run build --watch",
     "admin:css": "yarn workspace admin run build:css --watch",
-    "website_1": "yarn workspace dryer run build --watch",
-    "website_1:css": "yarn workspace dryer run build:css --watch",
-    "website_2": "yarn workspace winstonferguson run build --watch",
-    "website_2:css": "yarn workspace winstonferguson run build:css --watch",
+    "website_1": "yarn workspace website_1 run build --watch",
+    "website_1:css": "yarn workspace website_1 run build:css --watch",
+    "website_2": "yarn workspace website_2 run build --watch",
+    "website_2:css": "yarn workspace website_2 run build:css --watch",
     "build": "concurrently --kill-others-on-fail \"yarn admin\" \"yarn website_1\"  \"yarn website_2\"",
     "build:css": "concurrently --kill-others-on-fail \"yarn admin:css\" \"yarn website_1:css\"  \"yarn website_2:css\""
   }
 }
 ```
 
+Within each domains directory is the Yarn configuration for that domain including package.json and, in this instance, a weback configuration file.
+
+This setup enables us to:
+
+* 
 
 
-Within each domains directory is the Yarn configuration for that domain including package.json and, in this instance, a weback config file.
+
 
 
 
