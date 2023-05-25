@@ -29,10 +29,9 @@ h1 {
   font-size: 1rem;
   font-weight: 900;
   line-height: 1;
-
   position: absolute;
-  top: 0;
-  right: - 1.5rem;
+  top: 0.35rem;
+  right: 0.35rem;
   z-index: 999;
 }
 
@@ -42,5 +41,9 @@ nested-fields {
   padding: 1rem;
   position: relative;
   max-width: 800px;
-  margin: 0 auto;
+  margin: 1rem auto;
+}
+
+nested-fields nested-fields .add_fields {
+  display: none;
 }

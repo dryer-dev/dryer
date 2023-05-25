@@ -5,4 +5,4 @@
   %div{data:{editor:{container: true}}}
   = f.fields_for :children do |s|
     = render "admin/sections/nested_fields", f: s 
-  = link_to_add_fields "Add section", f, :children
+  = link_to_add_fields "Add child section", f, :children
