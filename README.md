@@ -1,9 +1,13 @@
 # DRYER CMS
 
-I wanted a modern, lightweight, and flexible Rails CMS that was multisite compatible and developer friendly. The use case being an individual or organization building client sites that need flexibility and a backend for updating content. Clients could include small to medium sized enterprises that don't operate in the tech sector (the kind of organization that might consider Shopify Plus or other 4 figure annually SAAS products).The benefit of this over an existing CMS would be:
+I wanted a modern, lightweight, and flexible Rails CMS that was multisite compatible and developer friendly. 
 
-* develop or add features specific to a client or cluster of client's needs. i.e. a booking system for a cluster of small hotel websites
-* start with a blank slate for each site's front end - no bloated libraries or overriding inherited styles/scripts. But, the ability to easily add librabries to any sites if needed.
+The use case being an individual or organization building client sites that need flexibility and a backend for updating content. Clients could include small to medium sized enterprises that don't operate in the tech sector (the kind of organization that might consider Shopify Plus or other 4 figure annually SAAS products).
+
+The benefit of this over an existing CMS:
+
+* Develop or add features specific to a client or cluster of client's needs. *i.e. a booking system for a cluster of small hotel websites*
+* start with a blank slate for each site's front end - no bloated libraries or overriding inherited styles/scripts. *But, the ability to easily add librabries to any sites if needed.*
 
 This setup could enable the developer to deliver an efficient, optimized site with no limitation in potential. Should scalabilty become a concern, I foresee it being addressable on a specific site/client basis and the solution would be to migrate them out of the CMS and into a new build of their own.
 
