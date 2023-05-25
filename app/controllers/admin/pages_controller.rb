@@ -41,7 +41,7 @@ module Admin
     def update
       respond_to do |format|
         if @admin_page.update(admin_page_params)
-          format.html { redirect_to admin_pages_url, notice: 'Page was successfully updated.' }
+          format.html { render :edit, notice: 'Page was successfully updated.' }
           format.json { render :show, status: :ok, location: @admin_page }
         else
           format.html { render :edit, status: :unprocessable_entity }
@@ -72,8 +72,13 @@ module Admin
       params.require(:page)
             .permit(
               :title,
-              :parentable_id
-              
+              :parentable_id,
+              sections_attributes: [
+                :_destroy,
+                :id,
+                :data,
+                { children_attributes: %i[_destroy id page_id data] }
+              ]
             )
     end
   end

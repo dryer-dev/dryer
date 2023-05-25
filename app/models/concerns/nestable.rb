@@ -7,7 +7,9 @@
 ## https://cloud.google.com/bigquery/docs/best-practices-performance-patterns
 module Nestable
   extend ActiveSupport::Concern
-
+  # parentable_id is used in forms to set the parent
+  # it is whitelisted in the controller
+  # and used here to create, update, or destroy the nesting through an after_save callback
   attr_accessor :parentable_id
 
   included do
@@ -19,7 +21,8 @@ module Nestable
     has_many :children,
              through: :child_nestings,
              source: :childable,
-             source_type: name
+             source_type: name # returns class name as a string
+             
     # child in relationship
     has_one :nesting,
             as: :childable,
@@ -28,18 +31,20 @@ module Nestable
     has_one :parent,
             through: :nesting,
             source: :parentable,
-            source_type: name
+            source_type: name # returns class name as a string
 
     accepts_nested_attributes_for :child_nestings,
-                                  allow_destroy: true
-    accepts_nested_attributes_for :nesting,
                                   reject_if: :all_blank,
-                                  update_only: true,
                                   allow_destroy: true
-    after_save :handle_nesting
+    accepts_nested_attributes_for :children,
+                                  reject_if: :all_blank,
+                                  allow_destroy: true
+    after_save :handle_parent
   end
 
-  def handle_nesting
+  private
+
+  def handle_parent
     return update_nesting if nesting.present?
 
     return create_nesting if parentable_id.present?

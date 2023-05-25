@@ -16,13 +16,17 @@ module Admin::AdminHelper
     # fields_options = { child_index: id }
     # child_index` is used to ensure the key of the associated array is unique, and that it matched the value in the `data-id` attribute.
     # `person[addresses_attributes][child_index_value][_destroy]`
-    fields = f.fields_for(association, new_object, child_index: id) do |builder|
-    # `association.to_s.singularize + "_fields"` ends up evaluating to `address_fields`
-    # The render function will then look for `views/people/_address_fields.html.erb`
-    # The render function also needs to be passed the value of 'builder', because `views/people/_address_fields.html.erb` needs this to render the form tags.
-      if options[:class_name]
-        render("admin/" + options[:class_name].pluralize + "/fields", f: builder)
-      else
+    if association == :children
+      form_object_class_name = f.object.class.name.underscore.pluralize
+
+      fields = f.fields_for(association, new_object, child_index: id) do |builder|
+        render("admin/" + form_object_class_name + "/fields", f: builder)
+      end
+    else
+      fields = f.fields_for(association, new_object, child_index: id) do |builder|
+      # `association.to_s.singularize + "_fields"` ends up evaluating to `address_fields`
+      # The render function will then look for `views/people/_address_fields.html.erb`
+      # The render function also needs to be passed the value of 'builder', because `views/people/_address_fields.html.erb` needs this to render the form tags.  
         render("admin/" + association.to_s + "/fields", f: builder)
       end
     end
@@ -38,7 +42,7 @@ module Admin::AdminHelper
       class: "add_fields #{options[:class]}",
       data: {
         id: id,
-        fields: fields.gsub("\n", ""),
+        fields: fields.gsub("\n", "")
       }
     )
   end

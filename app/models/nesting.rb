@@ -4,10 +4,17 @@
 # used in other models via the Nestable concern
 class Nesting < ApplicationRecord
   belongs_to :parentable,
-             inverse_of: :child_nestings,
              polymorphic: true
 
   belongs_to :childable,
-             inverse_of: :nesting,
              polymorphic: true
+
+  validates_associated :handle_children
+
+  def handle_children
+    puts '__________________________________________________________________NESTIN!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
+    puts parentable.inspect
+    puts childable.inspect
+    puts attributes.inspect
+  end
 end
