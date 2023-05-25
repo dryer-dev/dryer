@@ -41,7 +41,7 @@ module Admin
     def update
       respond_to do |format|
         if @admin_page.update(admin_page_params)
-          format.html { render :edit, notice: 'Page was successfully updated.' }
+          format.html { redirect_to admin_pages_url, notice: 'Page was successfully updated.' }
           format.json { render :show, status: :ok, location: @admin_page }
         else
           format.html { render :edit, status: :unprocessable_entity }
