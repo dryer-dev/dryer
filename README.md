@@ -34,9 +34,12 @@ Yarn dependencies:
 
 ## Database
 
-The app relies on the following architecture:
+Currently the current architecture is in place:
+
 
 ![db schematic](https://github.com/dryer-dev/dryer/blob/main/dryer-db-schematic.png)
+
+To do:
 
 
 ## Configuration
