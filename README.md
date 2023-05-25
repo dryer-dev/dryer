@@ -36,7 +36,7 @@ Yarn dependencies:
 
 The app relies on the following architecture:
 
-![alt text](https://github.com/[dryer-dev]/[dryer]/dryer-db-schematic.png?raw=true)
+![db schematic](https://github.com/dryer-dev/dryer/dryer-db-schematic.png?raw=true)
 
 
 ## Configuration
