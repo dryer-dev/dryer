@@ -1,4 +1,4 @@
-# DRYER CMS
+# Dryer CMS
 
 I wanted a modern, lightweight, and flexible Rails CMS that was multidomain compatible and developer friendly. 
 
