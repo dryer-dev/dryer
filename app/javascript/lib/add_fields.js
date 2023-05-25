@@ -1,4 +1,6 @@
 import NestedFields from "./nested_fields";
+import EditorInstance from './editor_instance.js';
+
 // https://stevepolito.design/blog/create-a-nested-form-in-rails-from-scratch/
 // app/javascript/packs/nested-forms/addFields.js
 class addFields {
@@ -24,13 +26,17 @@ class addFields {
     if (!link || !e) return;
     // Prevent the browser from following the URL.
     e.preventDefault();
-    const nestedFields = new NestedFields(link.dataset.id, link.dataset.fields);
+    // Create a new instance of NestedFields
+    const nestedFields = new NestedFields(link.dataset);
+    // Insert the new fields into the DOM, before the "Add new" link.
     link.parentElement.insertBefore(nestedFields, link);
+    // Check if these NestedFields need an EditorJS instance
+    if (nestedFields.dataset.editor) {
+      const nestedFieldsEditor = new EditorInstance(nestedFields);
+    }
   }
 }
-
 // Wait for turbolinks to load, otherwise `document.querySelectorAll()` won't work
 window.addEventListener("load", () => new addFields());
 // Wait for turbolinks to load, otherwise `document.querySelectorAll()` won't work
 window.addEventListener("turbolinks:load", () => new addFields());
-

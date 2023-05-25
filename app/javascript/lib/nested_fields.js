@@ -1,25 +1,21 @@
-import addEditorJS from './add_editor.js';
+import { createRef } from './utilities.js';
 // Based on https://stevepolito.design/blog/create-a-nested-form-in-rails-from-scratch/
 // refactored for event delegation vs class object
 // we're nesting forms within nested forms and this js will only be loaded in edit views
 export default class NestedFields extends HTMLElement {
-  constructor(id, fields) {
+  constructor(dataset) {
     super();
-    this.id = id;
-    this.fields = fields;
-    // Save a unique timestamp to ensure the key of the associated array is unique.
-    this.ref = new Date().getTime();
-  }
-
-  checkForEditor() {
-    const container = this.querySelector("[data-editorjs-container]");
-    if (container) return addEditorJS(container, this.ref);    
+    this.id = dataset?.id || this.dataset.id;
+    this.fields = dataset?.fields || this.innerHTML;
+    this.ref = createRef();
+    this.dataset.editor = dataset?.editor || this.dataset.editor;
+    this.dataset.editorRef = this.ref;
   }
   // Fires when attached
   connectedCallback() { 
     this.innerHTML = this.newFields();
-    this.checkForEditor();
     this.setupRemoveLink();
+    // handleEditorJS(this);
   }    
   // Replace all instances of the `new_object.object_id` with `time`, and save markup into a
   // variable if there's a value in `regexp`.
@@ -32,8 +28,9 @@ export default class NestedFields extends HTMLElement {
   // Create a new regular expression needed to find any instance of the `new_object.object_id`
   // used in the fields data attribute if there's a value in `linkId`.
   regexp() {
-    if (this.id) {
-      return new RegExp(this.id, 'g');
+    const id = this.id;
+    if (id) {
+      return new RegExp(id, 'g');
     }
     return null;    
   }
