@@ -11,7 +11,7 @@ module.exports = {
   output: {
     filename: `${workspace}.js`,
     sourceMapFilename: `${workspace}.map`,
-    path: path.resolve(__dirname, "../../app/assets/builds"),
+    path: path.resolve(__dirname, `../../app/assets/builds/`),
   },
   plugins: [
     new webpack.optimize.LimitChunkCountPlugin({

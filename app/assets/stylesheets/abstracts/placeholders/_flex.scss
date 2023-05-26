@@ -1,5 +1,30 @@
-@use "../variables" as *;
-
-%flex {
+%flex-row {
+  align-items: center;
   display: flex;
+
+  &--center {
+    @extend %flex-row;
+    justify-content: center;
+  }
+
+  &--end {
+    @extend %flex-row;
+    justify-content: flex-end;
+  }
+
+  &--reverse {
+    @extend %flex-row;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+
+  &--space-between {
+    @extend %flex-row;
+    justify-content: space-between;
+  }
+
+  &--start {
+    @extend %flex-row;
+    justify-content: start;
+  }
 }

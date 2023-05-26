@@ -19,6 +19,6 @@
   },
   "scripts": {
     "build": "webpack --config webpack.config.js",
-    "build:css": "sass ../../app/assets/stylesheets/admin.scss:../../app/assets/builds/admin.css --no-source-map --load-path=node_modules"
+    "build:css": "sass ../../app/assets/stylesheets/admin/app.scss:../../app/assets/builds/admin.css --no-source-map --load-path=node_modules"
   }
 }

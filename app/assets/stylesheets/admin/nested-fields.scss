@@ -1,0 +1,54 @@
+@use "../abstracts" as *;
+
+nested-fields {
+  border: 1px solid rgb(195, 195, 195);
+  display: block;
+  margin: 1rem auto;
+  max-width: 800px;
+  padding: 1rem;  
+  position: relative;
+
+  nested-fields {
+    border: 1px solid rgba(195, 195, 195, 0.5);
+
+    .add_fields {
+      display: none;
+    }
+  }
+
+  .add_fields--children {
+    @extend %clickable-icon;
+    @extend %flex-row--center;
+    color:black; 
+    position: absolute;
+    right: 30px;
+    top: 0;  
+    transform: rotate(45deg);
+    z-index: 99;
+  }
+
+  .editor__container {
+    position: relative;
+  }
+
+  .remove_fields {
+    @extend %clickable-icon;
+    @extend %flex-row--center;
+    color: red;
+    font-size: 1rem;
+    font-weight: 900;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 99;
+  }
+}
+
+@for $i from 1 through 49 {
+  nested-fields:nth-child(n + #{$i}) {
+    z-index: calc(99 - $i);
+  }
+  nested-fields:nth-child(n + #{$i}) > .editor__container {
+    z-index: calc(99 - $i);
+  }
+}

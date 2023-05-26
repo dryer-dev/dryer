@@ -1,0 +1,10 @@
+%clickable {
+  cursor: pointer;
+
+  &-icon {
+    @extend %clickable;
+  
+    height: 30px;
+    width: 30px;
+  }
+}

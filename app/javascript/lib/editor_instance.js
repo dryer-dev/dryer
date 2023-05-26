@@ -20,7 +20,7 @@ export default class EditorInstance extends EditorJS {
     // and pass the configuration options
     super({
       autofocus: true,
-      minHeight: 13,
+      minHeight: 0,
       holder: container.id,
       tools: {
         header: {

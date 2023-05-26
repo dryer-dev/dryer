@@ -13,7 +13,6 @@ function setupEditors() {
   }
 }
 
-// Wait for turbolinks to load, otherwise `document.querySelectorAll()` won't work
 window.addEventListener("load", () => {
   setupEditors();
 });
