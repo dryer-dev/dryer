@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Admin::FormHelper
   class ActionView::Helpers::FormBuilder
     # http://stackoverflow.com/a/2625727/1935918

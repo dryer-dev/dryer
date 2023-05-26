@@ -14,6 +14,6 @@
   .field
     = f.fields_for :sections do |s|
       = render "admin/sections/nested_fields", f: s 
-    = link_to_add_fields "Add section", f, :sections
+    = link_to_add_nested_fields "+ Section", f, :sections
   .actions
     = f.submit 'Save'
