@@ -4,6 +4,8 @@ I wanted a modern, lightweight, and flexible Rails CMS that was multidomain comp
 
 I built one as the other open source Rails CMS' were already far along a path (that started a long time ago - things have changed) or developing into a paid product. The most suitable one for me, Comfortable Mexican Sofa, hasn't been updated in years.
 
+It's called Dryer because I own the domain dryer.dev
+
 
 ## Use case 
 
@@ -16,6 +18,8 @@ The benefit of this over an existing CMS (non Rails):
 
 This setup could enable the developer to deliver an efficient, optimized site with no limitation in potential. Should scalabilty become a concern, I foresee it being addressable on a specific site/client basis and the solution would be to migrate them out of the CMS and into a new build of their own.
 
+This CMS uses a block editor - EditorJS [https://editorjs.io/] - for a modern content editing experience with a clean output.
+
 ## Framework
 
 This app is built using Rails 7 with a MariaDB database. It was written in Ruby v.3.2.1
@@ -26,21 +30,31 @@ In addtion to the gems bundled with Rails 7, its dependencies include:
 
 * **jsbundling-rails** bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 * **cssbundling-rails** bundle and process CSS [https://github.com/rails/cssbundling-rails]
-* **devise** flexible authentication solution for Rails with Warden
-* **acts_as_tenant** integrates multi-tenancy into a Rails application in a convenient and out-of-your way manner
+* **devise** flexible authentication solution for Rails with Warden [https://github.com/heartcombo/devise]
+* **acts_as_tenant** integrates multi-tenancy into a Rails application in a convenient and out-of-your way manner [https://github.com/ErwinM/acts_as_tenant]
 
 Yarn dependencies:
-* concurrently
+* **concurrently**
+* **@editorjs** isolated to an admin namespace/workspace.
 
 ## Database
 
-Currently the current architecture is in place:
-
+The current architecture in place:
 
 ![db schematic](https://github.com/dryer-dev/dryer/blob/main/dryer-db-schematic.png)
 
-To do:
+Tables:
 
+* **Users** A standard Devise Users table.
+* **Sites** Sites have specified domain and subdomain. The relationship between Users and Sites hasn't been addressed yet. Pages are tenants of Sites. 
+* **Nestings** Handles heirarchies via a polymorphic association. I went this way over self-joins for reusability and to avoid an SQL anti-pattern. [https://cloud.google.com/bigquery/docs/best-practices-performance-patterns]
+* **Pages** Wepsite pages. Only has a Title attibute at the moment. Pages have many *sub-*Pages via Nestings. This facilates Page heirarchies like Blog > Posts, Services > Service... A separate Categories table will address the category names of Pages. As Pages are tenants of Sites, anyhing that relates to Pages is scoped to its Site. Pages have many Sections. *TODO: maybe include SEO related fields like description*
+* **Sections** Sections only have a data attribute. The data attribute stores JSON data from the block editor: EditorJS. Sections can have many *sub-*Sections via Nestings. This facilates a very flexible layout strucute that can accommodate mulit-columns, grids... This nesting is only one level deep but it may be worth looking into the benefit of deeper nesting. *TODO: add a css_classes attribute*
+
+
+Tables to add:
+* **Categories** Categorize Pages
+* **Files** Attach images, files... to Sections
 
 ## Configuration
 
