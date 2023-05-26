@@ -8,7 +8,7 @@ I built one as the other open source Rails CMS' were already far along a path (t
 
 An individual or organization building client sites that need flexibility and a backend for updating content. Clients could include small to medium sized enterprises that don't operate in the tech sector (the kind of organization that might consider Shopify Plus or other 4 figure annually SAAS products).
 
-The benefit of this over an existing CMS (non Rails):
+The benefit of this over an existing CMS (not exclusive to Rails):
 
 * Develop or add features specific to a client or cluster of client's needs. *i.e. a booking system for a cluster of small hotel websites*
 * Start with a blank slate for each site's front end - no bloated libraries or overriding inherited styles/scripts. *But, the ability to easily add librabries to any sites if needed.*
@@ -25,14 +25,14 @@ This app is built using Rails 7 with a MariaDB database. It was written in Ruby 
 
 In addtion to the gems bundled with Rails 7, its dependencies include:
 
-* **jsbundling-rails:** bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
-* **cssbundling-rails:** bundle and process CSS [https://github.com/rails/cssbundling-rails]
-* **devise:** flexible authentication solution for Rails with Warden [https://github.com/heartcombo/devise]
-* **acts_as_tenant:** integrates multi-tenancy into a Rails application in a convenient and out-of-your way manner [https://github.com/ErwinM/acts_as_tenant]
+* **jsbundling-rails:** Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
+* **cssbundling-rails:** Bundle and process CSS [https://github.com/rails/cssbundling-rails]
+* **devise:** Flexible authentication solution for Rails with Warden [https://github.com/heartcombo/devise]
+* **acts_as_tenant:** Integrates multi-tenancy into a Rails application in a convenient and out-of-your way manner [https://github.com/ErwinM/acts_as_tenant]
 
 Node dependencies:
-* **concurrently**
-* **@editorjs** isolated to an admin namespace/workspace.
+* **concurrently:** Run multiple commands concurrently [https://github.com/open-cli-tools/concurrently].
+* **@editorjs:** Isolated to an admin namespace/workspace [https://editorjs.io/].
 
 ## Database
 
@@ -52,6 +52,7 @@ Tables:
 Tables to add:
 * **Categories:** Categorize Pages
 * **Files:** Attach images, files... to Sections
+* **Menus:** Site menus
 
 ## Configuration
 
@@ -59,7 +60,7 @@ Tables to add:
 
 #### Namespaces
 
-**Admin:** Used to update content. acts_as_tenantable uses a method to set the current tenant in the Application Controller so the entire Admin namespace is automatically scoped to the domain it resides within.
+An Admin namespace is used to update site content. acts_as_tenantable uses a method to set the current tenant in the Application Controller so the entire Admin namespace is automatically scoped to the domain it resides within.
 
 #### Models
 
@@ -67,7 +68,7 @@ Fairly standard Rails stuff at the moment. Currently missing validations....
 
 Concerns:
 
-* **Nestables:** Model concern that defines Active Record assiociations for models with hierarchies implemented via Nestings. Handles defining parents (used by Pages) via the nesting_parent_select method and parentable_id attribute. 
+* **Nestables:** Defines Active Record assiociations for models with hierarchies implemented via Nestings. Handles defining parents (used by Pages) via the nesting_parent_select method and parentable_id attribute. 
 * **StringCleanables:** Contains methods for tidying strings before validation. I wrote this earlier and left it - there are not enough notes and it might smell. *TODO: document and refactor*
 
 #### Controllers
@@ -81,27 +82,27 @@ Using Haml.
 Presenting a site depends on the page, sections, and subdomain directories:
 
 * **Pages:** I anticipate these will be universal
-* **Sections:** Files included in the views > sections directory are accessible by all domains *- standard section views -*. Sections will render structured content based on the JSON data EditorJS saves. Hopefully, this will enable a programatic approach to clean HTML markup.
+* **Sections:** Files included in the views > sections directory are accessible by all domains *- standard section views*. Sections will render structured content based on the JSON data EditorJS saves. Hopefully, this will enable a programatic approach to clean HTML markup.
 * **Subdomains:** Views exclusively for the given site (current_tenant). This includes header, footer, and sections. Sites can have their own sections or override a *standard section view* by creating a file with the same name in their respective sections directory.
 
 
 There are two main layout files:
 
 * **application:** Relies on current_tenant to: retrieve CSS and JS builds, render the header and footer.
-* **admin:** Uses the admin CSS and JS builds with the current_tenant header and footer - *a sites admin area will look bespoke to it*.
+* **admin:** Uses the admin CSS and JS builds with the current_tenant header and footer - *a site's admin area will look bespoke to it*.
 
 
 There are some helpers for the Admin namespace:
 
 * **nesting_parent_select:** A custom form helper that creates a collection_select based on the form object.
-* **link_to_add_nested_fields:** this outputs a link tag to create nested attributes via JS. This implementation is based on a method outlined here: [https://stevepolito.design/blog/create-a-nested-form-in-rails-from-scratch/]. Data attrabitues are used to pass content to the front end.
+* **link_to_add_nested_fields:** this outputs a link tag to create nested attributes via JS. This implementation is based on a method outlined here: [https://stevepolito.design/blog/create-a-nested-form-in-rails-from-scratch/]. Data attribitues are used to pass content to the front end.
 * **SitesHelper:** The methods in here will faciliate selecting a layout for a section based on files in views directory. 
 
 ### Front end
 
 #### Assets 
 
-Configured using Yarn workspaces reading a packages directory with subdirectories for each domain. When the app precompiles assets it relies on concurrently to execute the build scripts for each domain. 
+Configured using Yarn workspaces reading a packages directory with subdirectories for each domain. When the app precompiles assets it relies on concurrently [https://github.com/open-cli-tools/concurrently] to execute the build scripts for each domain. 
 
 For example, package.json might look like:
 
