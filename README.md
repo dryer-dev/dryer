@@ -132,57 +132,27 @@ For example, package.json might look like:
 
 Within each domains directory is the Yarn configuration for that domain including package.json and, in this instance, a webpack configuration file. *TODO: consider dropping Webpack in favour of a faster bundler - esbuild...* 
 
+Each site has it's own application.js file within the javascript > subdomain directory.
+
 #### JS
 
-#### SCSS
+Each site can have its own JS build and it's dependencies will be addressed by the compiler. We'll have the ability to share scripts between sites by importing from the parent directory. This could get complicated with each site responsible for its own dependencies so it may be best to only share vanilla JS without any dependencies from the parent directory.
 
-This setup enables us to:
+Admin uses the following classes (currently residing in javascript > lib):
 
-* 
+* **addFields:** this is taken from Steve Polito's implementation [https://stevepolito.design/blog/create-a-nested-form-in-rails-from-scratch/] but refactored for my NestedFields and EditorInstances.
+* **EditorInstances:** I wrote this to link DOM references with an EditorJS class. I figured this encapsulation was a good idea given the amount of EditorJS instances I'm going to have on a page.
+* **NestedFields:** I believe this take Polito's implementation up a notch. It's marrying and encapsulating the necessary DOM elements with the JS needed to make nested fields work.
 
-## Layouts
-
-
-
-## Editing content
+The end result is a very modern looking interface for updating content. Looks like this:
 
 ![db schematic](https://github.com/dryer-dev/dryer/blob/main/dryer-editing-sections.png)
 
+With the inclusion of EditorJS, I hope that the each sites HTML markup is relatively clean. Personally, I find ActionText and Trix looks dated and results in some ugly markup.
 
+#### Styles
 
+I'm using SCSS and one of it's newer features: placeholders [https://sass-lang.com/documentation/style-rules/placeholder-selectors]. Designing a directory and build process that uses placeholders, enables me to reuse styles between elements and, in this case, sites without having to resort to classes with classes and classes. It also enabes me to write a mini library to share between sites to optimize workflow. Additionally, this means all the dependent styles are dealt with in the compiler so a site's CSS file only contains CSS it's using. *I built a site using this method and its CSS file is 5.1kb and that includes the styles needed for its own admin area* 
 
+The stylesheets directory contains two folders (core and abstracts) to facilitate the sharing of styles between sites. You can also create an abstracts directory within a subdomain directory to share properties with the a site.
 
-
-
-
-
-modern Rails (7) I created this CMS to address the following:
-
-* 
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-## Layouts
-
-Html markup for 
