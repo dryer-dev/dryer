@@ -45,8 +45,8 @@ Tables:
 * **Users:** A standard Devise Users table.
 * **Sites:** Sites have specified domain and subdomain. The relationship between Users and Sites hasn't been addressed yet. Pages are tenants of Sites. 
 * **Nestings:** Handles heirarchies via a polymorphic association. I went this way over self-joins for reusability and to avoid an SQL anti-pattern. [https://cloud.google.com/bigquery/docs/best-practices-performance-patterns]
-* **Pages:** Wepsite pages. Only has a Title attibute at the moment. Pages have many *sub-*Pages via Nestings. This facilates Page heirarchies like Blog > Posts, Services > Service... A separate Categories table will address the category names of Pages. As Pages are tenants of Sites, anyhing that relates to Pages is scoped to its Site. Pages have many Sections. *TODO: maybe include SEO related fields like description*
-* **Sections:** Sections only have a data attribute. The data attribute stores JSON data from the block editor: EditorJS. Sections can have many *sub-*Sections via Nestings. This facilates a very flexible layout strucute that can accommodate mulit-columns, grids... This nesting is only one level deep but it may be worth looking into the benefit of deeper nesting. *TODO: add attributes for css_classes and rendering layout*
+* **Pages:** Wepsite pages. Only has a Title attibute at the moment. Pages have many sub-Pages via Nestings. This facilates Page heirarchies like Blog > Posts, Services > Service... A separate Categories table will address the category names of Pages. As Pages are tenants of Sites, anyhing that relates to Pages is scoped to its Site. Pages have many Sections. *TODO: maybe include SEO related fields like description*
+* **Sections:** Sections only have a data attribute. The data attribute stores JSON data from the block editor: EditorJS. Sections can have many sub-Sections via Nestings. This facilates a very flexible layout strucute that can accommodate mulit-columns, grids... This nesting is only one level deep but it may be worth looking into the benefit of deeper nesting. *TODO: add attributes for css_classes and rendering layout*
 
 
 Tables to add:
