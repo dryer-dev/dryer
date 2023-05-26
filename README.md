@@ -142,7 +142,7 @@ Admin uses the following classes (currently residing in javascript > lib):
 * **EditorInstances:** I wrote this to link DOM references with an EditorJS class. I figured this encapsulation was a good idea given the amount of EditorJS instances I'm going to have on a page.
 * **NestedFields:** I believe this take Polito's implementation up a notch. It's marrying and encapsulating the necessary DOM elements with the JS needed to make nested fields work.
 
-The end result is a very modern looking interface for updating content. Looks like this:
+The end result is a modern looking interface for updating content. Looks like this:
 
 ![db schematic](https://github.com/dryer-dev/dryer/blob/main/dryer-editing-sections.png)
 
