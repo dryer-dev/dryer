@@ -22,8 +22,6 @@ module StringCleanables
     end
   end
 
-  private
-
   def cleaner(string)
     # what we, currently, consider cleaning
     # strip and downcase string
