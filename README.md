@@ -4,9 +4,6 @@ I wanted a modern, lightweight, and flexible Rails CMS that was multidomain comp
 
 I built one as the other open source Rails CMS' were already far along a path (that started a long time ago - things have changed) or developing into a paid product. The most suitable one for me, Comfortable Mexican Sofa, hasn't been updated in years.
 
-It's called Dryer because I own the domain dryer.dev
-
-
 ## Use case 
 
 An individual or organization building client sites that need flexibility and a backend for updating content. Clients could include small to medium sized enterprises that don't operate in the tech sector (the kind of organization that might consider Shopify Plus or other 4 figure annually SAAS products).
