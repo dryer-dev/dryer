@@ -33,7 +33,7 @@ In addtion to the gems bundled with Rails 7, its dependencies include:
 * **devise:** flexible authentication solution for Rails with Warden [https://github.com/heartcombo/devise]
 * **acts_as_tenant:** integrates multi-tenancy into a Rails application in a convenient and out-of-your way manner [https://github.com/ErwinM/acts_as_tenant]
 
-Yarn dependencies:
+Node dependencies:
 * **concurrently**
 * **@editorjs** isolated to an admin namespace/workspace.
 
@@ -92,6 +92,10 @@ This setup enables us to:
 
 * 
 
+
+## Editing content
+
+![db schematic](https://github.com/dryer-dev/dryer/blob/main/dryer-editing-sections.png)
 
 
 
