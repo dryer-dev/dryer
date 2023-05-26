@@ -49,7 +49,7 @@ Tables:
 * **Sites:** Sites have specified domain and subdomain. The relationship between Users and Sites hasn't been addressed yet. Pages are tenants of Sites. 
 * **Nestings:** Handles heirarchies via a polymorphic association. I went this way over self-joins for reusability and to avoid an SQL anti-pattern. [https://cloud.google.com/bigquery/docs/best-practices-performance-patterns]
 * **Pages:** Wepsite pages. Only has a Title attibute at the moment. Pages have many *sub-*Pages via Nestings. This facilates Page heirarchies like Blog > Posts, Services > Service... A separate Categories table will address the category names of Pages. As Pages are tenants of Sites, anyhing that relates to Pages is scoped to its Site. Pages have many Sections. *TODO: maybe include SEO related fields like description*
-* **Sections:** Sections only have a data attribute. The data attribute stores JSON data from the block editor: EditorJS. Sections can have many *sub-*Sections via Nestings. This facilates a very flexible layout strucute that can accommodate mulit-columns, grids... This nesting is only one level deep but it may be worth looking into the benefit of deeper nesting. *TODO: add a css_classes attribute*
+* **Sections:** Sections only have a data attribute. The data attribute stores JSON data from the block editor: EditorJS. Sections can have many *sub-*Sections via Nestings. This facilates a very flexible layout strucute that can accommodate mulit-columns, grids... This nesting is only one level deep but it may be worth looking into the benefit of deeper nesting. *TODO: add attributes for css_classes and rendering layout*
 
 
 Tables to add:
@@ -58,7 +58,51 @@ Tables to add:
 
 ## Configuration
 
+### Back end
+
+#### Namespaces
+
+**Admin:** Used to update content. acts_as_tenantable uses a method to set the current tenant in the Application Controller so the entire Admin namespace is automatically scoped to the domain it resides within.
+
+#### Models
+
+Fairly standard Rails stuff at the moment. Currently missing validations....
+
+Concerns:
+
+* **Nestables:** Model concern that defines Active Record assiociations for models with hierarchies implemented via Nestings. Handles defining parents (used by Pages) via the nesting_parent_select method and parentable_id attribute. 
+* **StringCleanables:** Contains methods for tidying strings before validation. I wrote this earlier and left it - there are not enough notes and it might smell. *TODO: document and refactor*
+
+#### Controllers
+
+Standard Rails stuff plus an Admin Controller for the Admin namespace.
+
+#### Views
+
+Using Haml.
+
+Presenting a site depends on the page, sections, and subdomain directories:
+
+* **Pages:** I anticipate these will be universal
+* **Sections:** Files included in the views > sections directory are accessible by all domains *- standard section views -*. Sections will render structured content based on the JSON data EditorJS saves. Hopefully, this will enable a programatic approach to clean HTML markup.
+* **Subdomains:** Views exclusively for the given site (current_tenant). This includes header, footer, and sections. Sites can have their own sections or override a *standard section view* by creating a file with the same name in their respective sections directory.
+
+
+There are two main layout files:
+
+* **application:** Relies on current_tenant to: retrieve CSS and JS builds, render the header and footer.
+* **admin:** Uses the admin CSS and JS builds with the current_tenant header and footer - *a sites admin area will look bespoke to it*.
+
+
+There are some helpers for the Admin namespace:
+
+* **nesting_parent_select:** A custom form helper that creates a collection_select based on the form object.
+* **link_to_add_nested_fields:** this outputs a link tag to create nested attributes via JS. This implementation is based on a method outlined here: [https://stevepolito.design/blog/create-a-nested-form-in-rails-from-scratch/]. Data attrabitues are used to pass content to the front end.
+* **SitesHelper:** The methods in here will faciliate selecting a layout for a section based on files in views directory. 
+
 ### Front end
+
+#### Assets 
 
 Configured using Yarn workspaces reading a packages directory with subdirectories for each domain. When the app precompiles assets it relies on concurrently to execute the build scripts for each domain. 
 
@@ -86,11 +130,18 @@ For example, package.json might look like:
 }
 ```
 
-Within each domains directory is the Yarn configuration for that domain including package.json and, in this instance, a weback configuration file.
+Within each domains directory is the Yarn configuration for that domain including package.json and, in this instance, a webpack configuration file. *TODO: consider dropping Webpack in favour of a faster bundler - esbuild...* 
+
+#### JS
+
+#### SCSS
 
 This setup enables us to:
 
 * 
+
+## Layouts
+
 
 
 ## Editing content
