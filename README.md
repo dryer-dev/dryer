@@ -45,8 +45,8 @@ Tables:
 * **Users:** A standard Devise Users table.
 * **Sites:** Sites have specified domain and subdomain. The relationship between Users and Sites hasn't been addressed yet. Pages are tenants of Sites. 
 * **Nestings:** Handles heirarchies via a polymorphic association. I went this way over self-joins for reusability and to avoid an SQL anti-pattern. [https://cloud.google.com/bigquery/docs/best-practices-performance-patterns]
-* **Pages:** Wepsite pages. Only has a Title attibute at the moment. Pages have many sub-Pages via Nestings. This facilates Page heirarchies like Blog > Posts, Services > Service... A separate Categories table will address the category names of Pages. As Pages are tenants of Sites, anyhing that relates to Pages is scoped to its Site. Pages have many Sections. *TODO: maybe include SEO related fields like description*
-* **Sections:** Sections only have a data attribute. The data attribute stores JSON data from the block editor: EditorJS. Sections can have many sub-Sections via Nestings. This facilates a very flexible layout strucute that can accommodate mulit-columns, grids... This nesting is only one level deep but it may be worth looking into the benefit of deeper nesting. *TODO: add attributes for css_classes and rendering layout*
+* **Pages:** Wepsite pages. Only has a Title attibute at the moment. Pages have many sub-Pages via Nestings. This facilates Page heirarchies like Blog > Posts, Services > Service... A separate Categories table will address the category names of Pages. As Pages are tenants of Sites, anything that relates to Pages is scoped to its Site. Pages have many Sections. *TODO: maybe include SEO related fields like description*
+* **Sections:** Sections only have a data attribute. The data attribute stores JSON data from the block editor: EditorJS. Sections can have many sub-Sections via Nestings. This facilates a very flexible layout strucure that can accommodate multi-columns, grids... This nesting is only one level deep but it may be worth looking into the benefit of deeper nesting. *TODO: add attributes for css_classes and rendering layout*
 
 
 Tables to add:
@@ -69,7 +69,7 @@ Fairly standard Rails stuff at the moment. Currently missing validations....
 Concerns:
 
 * **Nestables:** Defines Active Record assiociations for models with hierarchies implemented via Nestings. Handles defining parents (used by Pages) via the nesting_parent_select method and parentable_id attribute. 
-* **StringCleanables:** Contains methods for tidying strings before validation. I wrote this earlier and left it - there are not enough notes and it might smell. *TODO: document and refactor*
+* **StringCleanables:** Contains methods for tidying strings before validation. I wrote this earlier and left it - there are not enough notes and it probably smells. *TODO: document and refactor*
 
 #### Controllers
 
@@ -88,7 +88,7 @@ Presenting a site depends on the page, sections, and subdomain directories:
 
 There are two main layout files:
 
-* **application:** Relies on current_tenant to: retrieve CSS and JS builds, render the header and footer.
+* **application:** Relies on current_tenant to: retrieve CSS and JS builds and render the header and footer.
 * **admin:** Uses the admin CSS and JS builds with the current_tenant header and footer - *a site's admin area will look bespoke to it*.
 
 
@@ -134,7 +134,7 @@ Each site has it's own application.js file within the javascript > subdomain dir
 
 #### JS
 
-Each site can have its own JS build and it's dependencies will be addressed by the compiler. We'll have the ability to share scripts between sites by importing from the parent directory. This could get complicated with each site responsible for its own dependencies so it may be best to only share vanilla JS without any dependencies from the parent directory.
+As a site has its own build, its dependencies are addressed by the compiler. We'll have the ability to share scripts between sites by importing from the parent directory. This could get complicated with each site responsible for its own dependencies so it may be best to only share vanilla JS without any dependencies from the parent directory.
 
 Admin uses the following classes (currently residing in javascript > lib):
 
@@ -150,7 +150,11 @@ With the inclusion of EditorJS, I hope that the each sites HTML markup is relati
 
 #### Styles
 
-I'm using SCSS and one of it's newer features: placeholders [https://sass-lang.com/documentation/style-rules/placeholder-selectors]. Designing a directory and build process that uses placeholders, enables me to reuse styles between elements and, in this case, sites without having to resort to classes with classes and classes. It also enabes me to write a mini library to share between sites to optimize workflow. Additionally, this means all the dependent styles are dealt with in the compiler so a site's CSS file only contains CSS it's using. *I built a site using this method and its CSS file is 5.1kb and that includes the styles needed for its own admin area* 
+I'm using SCSS and one of it's newer features: placeholders [https://sass-lang.com/documentation/style-rules/placeholder-selectors]. Designing a directory and build process that uses placeholders, enables me to reuse styles between elements and, in this case, sites, without having to resort to classes with classes and classes. It also enabes me to write a mini library to share between sites to optimize workflow. Additionally, this means all the dependent styles are dealt with in the compiler so a site's CSS file only contains CSS it's using. *It should be hard to go beyond a 10kb CSS file for a site* 
 
 The stylesheets directory contains two folders (core and abstracts) to facilitate the sharing of styles between sites. You can also create an abstracts directory within a subdomain directory to share properties with the a site.
+
+## Conclusion
+
+There's much more to do and, importantly, I still need to uplod this on a server and ensure the assets are delivered correctly.
 
