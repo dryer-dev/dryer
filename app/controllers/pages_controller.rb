@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# controller for pages
 class PagesController < ApplicationController
   before_action :set_page, only: %i[show]
 
