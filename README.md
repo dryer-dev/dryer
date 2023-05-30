@@ -156,5 +156,5 @@ The stylesheets directory contains two folders (core and abstracts) to facilitat
 
 ## Conclusion
 
-There's much more to do and, importantly, I still need to uplod this on a server and ensure the assets are delivered correctly.
+There's much more to do and, importantly, I still need to upload this on a server and ensure the assets are delivered correctly.
 
